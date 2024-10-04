@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Git Workflow for Team Development</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #2c3e50;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complete Git Workflow for Team Development</h1>
+
+    <h2>1. Clone the Repository to Local</h2>
+    <p>
+        When a new developer joins the project, they need to clone the repository from the remote to their local machine:
+    </p>
+    <pre><code>git clone &lt;remote-repo-url&gt;</code></pre>
+    <p>This command will copy the entire project from the remote repository to your local machine.</p>
+
+    <h2>2. Create a Feature Branch</h2>
+    <p>
+        Developers do not work directly on the main branch. Instead, they create separate branches for each feature or bug fix:
+    </p>
+    <pre><code>git checkout main
+git pull origin main
+git checkout -b feature/awesome-feature</code></pre>
+    <p>
+        <code>git checkout main</code> switches to the main branch.<br>
+        <code>git pull origin main</code> ensures the main branch is up to date.<br>
+        <code>git checkout -b feature/awesome-feature</code> creates a new feature branch and switches to it.
+    </p>
+
+    <h2>3. Develop on the Feature Branch</h2>
+    <p>
+        Work on the feature branch and commit changes:
+    </p>
+    <pre><code>git add &lt;file-name&gt;
+git commit -m "Implemented awesome feature"</code></pre>
+    <p>
+        <code>git add</code> stages the modified files.<br>
+        <code>git commit</code> commits the changes and describes what was changed.
+    </p>
+
+    <h2>4. Keep in Sync with Remote</h2>
+    <p>Since others might be updating the codebase, you need to sync your branch periodically.</p>
+
+    <h3>4.1 Fetch Updates from Remote</h3>
+    <pre><code>git fetch origin</code></pre>
+    <p>This command fetches the latest updates from the remote repository without merging.</p>
+
+    <h3>4.2 Merge the Latest Updates from Main</h3>
+    <pre><code>git merge origin/main</code></pre>
+    <p>Ensure that your feature branch includes the latest changes from the main branch. If there are conflicts, resolve them and commit.</p>
+
+    <h2>5. Push the Feature Branch to Remote</h2>
+    <p>
+        When the feature is ready for review, push the branch to the remote repository:
+    </p>
+    <pre><code>git push origin feature/awesome-feature</code></pre>
+    <p>This command creates a remote branch with the same name for team members to view, test, or review.</p>
+
+    <h2>6. Create a Pull Request (PR)</h2>
+    <p>
+        After pushing, create a Pull Request (PR) on a platform like GitHub, GitLab, or Bitbucket to merge the feature branch into the main branch.
+    </p>
+    <p>Team members can review the code and provide feedback.</p>
+
+    <h2>7. Merge into Main Branch</h2>
+    <p>Once the PR is approved, merge the feature branch into the main branch:</p>
+    <pre><code>git checkout main
+git pull origin main
+git merge feature/awesome-feature
+git push origin main</code></pre>
+    <p>
+        Switch to the main branch, ensure it is up to date, merge the feature branch, and push the updates to the remote repository.
+    </p>
+
+    <h2>8. Create a Version Tag</h2>
+    <p>When the main branch reaches a stable state and is ready for release, create a tag:</p>
+
+    <h3>8.1 Create an Annotated Tag</h3>
+    <pre><code>git tag -a v1.0.0 -m "Release version 1.0.0"</code></pre>
+    <p>Create a tag named <code>v1.0.0</code> with a description.</p>
+
+    <h3>8.2 Push the Tag to Remote</h3>
+    <pre><code>git push origin v1.0.0</code></pre>
+    <p>Push the tag to the remote repository so others can see it.</p>
+
+    <h2>9. Delete the Feature Branch</h2>
+    <p>Once the feature branch is merged and no longer needed, delete it:</p>
+
+    <h3>9.1 Delete the Local Branch</h3>
+    <pre><code>git branch -d feature/awesome-feature</code></pre>
+
+    <h3>9.2 Delete the Remote Branch</h3>
+    <pre><code>git push origin --delete feature/awesome-feature</code></pre>
+
+    <h2>10. Return to Main Branch and Continue Working</h2>
+    <p>After completing a feature, switch back to the main branch to get the latest updates and start new tasks:</p>
+    <pre><code>git checkout main
+git pull origin main</code></pre>
+
+    <h2>11. Manage Versions Using Tags</h2>
+    <p>Tags help mark important milestones and releases. To switch to a particular release version:</p>
+    <pre><code>git checkout v1.0.0</code></pre>
+    <p>To delete a tag:</p>
+
+    <h3>11.1 Delete a Local Tag</h3>
+    <pre><code>git tag -d v1.0.0</code></pre>
+
+    <h3>11.2 Delete a Remote Tag</h3>
+    <pre><code>git push origin --delete v1.0.0</code></pre>
+
+    <h2>Summary of Complete Workflow</h2>
+    <ol>
+        <li>Clone the repository to local.</li>
+        <li>Create a feature branch and develop on it.</li>
+        <li>Push to remote and create a PR for review.</li>
+        <li>Merge into the main branch after approval.</li>
+        <li>Create version tags and push them to remote.</li>
+        <li>Delete feature branches after merging.</li>
+        <li>Use tags for version management and easy reference to releases.</li>
+    </ol>
+
+    <p>This workflow helps ensure quality and traceability in team-based software development, with tags playing a crucial role in version management.</p>
+</body>
+</html>
